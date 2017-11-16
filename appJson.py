@@ -1,8 +1,11 @@
 import json
-
+import signal
+import sys
 
 #Конмда 1: загрузить базу данных
 #Команда 2: выписать всю информацю о книгах
+import traceback
+
 
 while(True):
     print("Введите команду")
@@ -60,6 +63,7 @@ while(True):
                 break
             else:
                 print("Нет такой команды для удаления книги. попробуйте еще раз")
+                break
         print("Кинга удалена")
         #удалить по имени книги
         #удалить по id книги
@@ -78,7 +82,5 @@ while(True):
         break
     else :
         print("Нет такой команды")
-
-
 
 
