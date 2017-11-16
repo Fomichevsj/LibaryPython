@@ -10,7 +10,7 @@ while(True):
     if command == "start":
         json_data = open("C:\\Users\\User\\PycharmProjects\\untitled\\books.json")  # Загружаем файл
         d = json.load(json_data)
-        listOfbooks = d["book"]
+        listOfbooks = d["books"]
     elif command == "print all":
         for l in listOfbooks:# l - это буква эль
             print("Инфо о книге")
@@ -32,23 +32,32 @@ while(True):
                 print("Введите имя книги")
                 name = input()
                 i = 0
+                found = False
                 for ld in listOfbooks:
                     print("шаг поиска ", i)
                     if ld["name"] == name:
                         print("Нашли нужную кнгиу")
                         print(ld["author"], ld["year"])
-                        #listOfbooks.remove(i)
+                        print(ld)
+                        print(listOfbooks)
+                        print("i = ", i)
+                        found = True
+                        break
                     i+=1
-                #Код который удалает книгу по имени
-                break;
+                if found:
+                    print("Элемент для удаления. Значение i здесь  = ", i)
+                    print(listOfbooks.pop(i))
+                else:
+                    print("Такой эелемент не найден. Попробуйте еще раз")
+                break
             elif typeOfDelete == "by id":
                 id = input()
                 #Код, который удаляет книгу по id
-                break;
+                break
             elif typeOfDelete == "last":
                 print("last")
                 #Код, который удаляет последнюю книгу
-                break;
+                break
             else:
                 print("Нет такой команды для удаления книги. попробуйте еще раз")
         print("Кинга удалена")
@@ -57,6 +66,16 @@ while(True):
         #удалить последнюю добавленную книгу
     elif command == "find":
         print("find book")
+    elif command == "save":
+        print("Тип listOfBooks = ", type(listOfbooks))
+        print("Список книг теперь такой:\n", listOfbooks)
+        data = {}
+        data['books'] = listOfbooks
+        with open('books.json', 'w') as outfile:
+            json.dump(data, outfile)
+    elif command == "exit":
+        print("Завершаю программу")
+        break
     else :
         print("Нет такой команды")
 

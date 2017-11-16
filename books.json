@@ -1,23 +1,8 @@
 {
-  "book":
-[
-  {
-    "name" : "hello",
-    "publish home" : "moscow",
-    "author" : "pushkin",
-    "year" : 1994
-  },
-  {
-    "name" : "big ban",
-    "publish home" : "city",
-    "author" : "tolstoy",
-    "year" : 1740
-  },
-  {
-   "name" : "kitty",
-    "publish home" : "new yourk",
-    "author" : "bush",
-    "year" : 1872
-  }
-]
+  "books":
+  [
+    {"id": 1, "name": "hello", "publish home": "moscow", "author": "pushkin", "year": 1994},
+    {"id": 3, "name": "another name", "publish home": "moscow", "author": "tolstoy", "year": 1898},
+    {"id": 2, "name": "name", "publish home": "moscow", "author": "ogon", "year": 1848}
+  ]
 }

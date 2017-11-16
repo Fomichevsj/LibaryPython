@@ -1,0 +1,20 @@
+import json
+
+data = {}
+
+
+listOfPeople = []
+dic = {}
+dic['name'] = 'scott'
+dic['website'] = 'asf'
+listOfPeople.append(dic)
+
+dic['name'] = 'ben'
+dic['website'] = 'goole'
+listOfPeople.append(dic)
+
+
+data['people'] = listOfPeople
+
+with open('data.json', 'w') as outfile:
+    json.dump(data, outfile)
