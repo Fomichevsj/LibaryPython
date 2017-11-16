@@ -1,0 +1,11 @@
+import socket
+sock = socket.socket()#Создаем сокет
+sock.bind(('',9090))#выбираем хост и порт
+sock.listen(1)# устанавливаем размер очередни
+conn, addr = sock.accept()#новый сокет и адрес клиента
+while True:
+    data = conn.recv(1024)
+    if not data:
+        break
+    conn.send(data.upper())
+conn.close()

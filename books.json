@@ -1,0 +1,23 @@
+{
+  "book":
+[
+  {
+    "name" : "hello",
+    "publish home" : "moscow",
+    "author" : "pushkin",
+    "year" : 1994
+  },
+  {
+    "name" : "big ban",
+    "publish home" : "city",
+    "author" : "tolstoy",
+    "year" : 1740
+  },
+  {
+   "name" : "kitty",
+    "publish home" : "new yourk",
+    "author" : "bush",
+    "year" : 1872
+  }
+]
+}
