@@ -2,17 +2,22 @@ import socket
 
 from appJson import run
 
+print("стартуем сервер")
+sock = socket.socket()
+sock.bind(('', 9090))
+sock.listen(1)
+conn, addr = sock.accept()
 
-#Далее, внутри функции run("hello") мы заменим взаимодействие в консоли на взаимоодействие через сокеты
-#Пока оставим так
-sock = socket.socket()#Создаем сокет
-sock.bind(('',9090))#выбираем хост и порт
-sock.listen(1)# устанавливаем размер очередни
-conn, addr = sock.accept()#новый сокет и адрес клиента
+print('connected:', addr)
+listOfbooks = []
 while True:
     data = conn.recv(1024)
+    print(data)
     if not data:
+        print("not data")
         break
-    run("hello")
-    conn.send(data.upper())
+    run(str(data.decode("utf-8")),listOfbooks)
+    conn.send(bytearray(str(data.upper()) + "abc", "utf-8"))
+
+
 conn.close()
