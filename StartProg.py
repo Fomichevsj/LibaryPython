@@ -1,4 +1,7 @@
-from appJson import run
 
+name = "abcd efg klmk"
+name = name.split(" ")
+for n in name:
+    print(n)
 
-run("hello")
+print(name[2])

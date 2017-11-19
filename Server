@@ -16,8 +16,18 @@ while True:
     if not data:
         print("not data")
         break
-    run(str(data.decode("utf-8")),listOfbooks)
-    conn.send(bytearray(str(data.upper()) + "abc", "utf-8"))
+    if data == b"add":
+        print("будем добавлять книгу. Все данные у клиента уже подготовленны")
+        paramsstr = conn.recv(1024)
+        paramsstr = str(paramsstr, "utf-8")
+        msg = run(str(data.decode("utf-8")),listOfbooks, paramsstr)
+        conn.send(bytearray(msg,"utf-8"))
+        continue
+    else:
+        msg = run(str(data.decode("utf-8")), listOfbooks, "")
+        print("msg from func: " + msg)
+        conn.send(bytearray(msg, "utf-8"))
+        #conn.send(bytearray(str(data.upper()) + "    "+ msg +"   abc", "utf-8"))
 
 
 conn.close()

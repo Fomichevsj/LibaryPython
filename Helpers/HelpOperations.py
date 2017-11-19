@@ -1,3 +1,4 @@
+import json
 #Файл реализует нужные функции для удалени, добавления, поиска книг в библиотеке
 def delete(listOfbooks):
     print("""Выберите какую книгу удалять: 
@@ -44,39 +45,33 @@ def delete(listOfbooks):
     # удалить по имени книги
     # удалить по id книги
     # удалить последнюю добавленную книгу
-def add(listOfbooks):
-    print("Введите необходимые данные для книги", end="\n")
-    print("\tВведите название книги: ", end='')
-    name = input()
-    print("")
-    print("\tВведите автора книги: ", end='')
-    author = input()
-    print("")
-    print("\tВведите год издания книги: ", end='')
-    try:
-        date = int(input())# TODO нужно учесть, что формат может быть не тот
-    except ValueError:
-        print("Дата может быть только числом. Попробуйте заново.")
-        return
-    print()
-    print("\tВведите издательский дом: ", end='')
-    publis_house = input()
-    print()
+def add(listOfbooks, params):
+    params = params.split(" ")
+    print(params)
+    print("p1 ", params[0])
+    print("p2 ", params[1])
+    print("p3", params[2])
+    print("p4", params[3])
     listOfbooks.append({
         "id": 0,  # Это нужно будет исправить TODO Исправить это
-        "name": name,
-        "publish home": publis_house,
-        "author": author,
-        "year": date
+        "name": params[0],
+        "publish home": params[3],
+        "author": params[1],
+        "year": int(params[2])
     })
     print("Список книг после изменения: ", listOfbooks)
+    return listOfbooks
 def printAll(listOfbooks):
+    res = ""
     for l in listOfbooks:  # l - это буква эль
         print("Инфо о книге")
         print("Имя книги: ", l["name"])
         print("Автор: ", l["author"])
         print("Год издания: ", l["year"])
         print("\n")
+        res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) +"\nГод издания: " + str(l["year"])
+    print("будет возращать сообщение: ", res)
+    return res
 def saveBooks(listOfbooks):
     print("Тип listOfBooks = ", type(listOfbooks))
     print("Список книг теперь такой:\n", listOfbooks)
