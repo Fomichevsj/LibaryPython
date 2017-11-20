@@ -1,5 +1,0 @@
-import FirstPy
-l = FirstPy.Book()
-l.print()
-l.name = "my name"
-l.print()

@@ -1,50 +1,30 @@
 import json
 #Файл реализует нужные функции для удалени, добавления, поиска книг в библиотеке
-def delete(listOfbooks):
-    print("""Выберите какую книгу удалять: 
-            По названию: by name
-            По id: by id
-            Последнюю: last""")
-    while (True):
-        print(">> By")
-        typeOfDelete = input()
-        if typeOfDelete == "by name":
-            print("Введите имя книги")
-            name = input()
-            i = 0
-            found = False
-            for ld in listOfbooks:
-                print("шаг поиска ", i)
-                if ld["name"] == name:
-                    print("Нашли нужную кнгиу")
-                    print(ld["author"], ld["year"])
-                    print(ld)
-                    print(listOfbooks)
-                    print("i = ", i)
-                    found = True
-                    break
-                i += 1
-            if found:
-                print("Элемент для удаления. Значение i здесь  = ", i)
-                print(listOfbooks.pop(i))
-                print("Кинга удалена")
-            else:
-                print("Такой эелемент не найден. Попробуйте еще раз")
+def delete(listOfbooks, params):
+    i = 0
+    found = False
+    for ld in listOfbooks:
+        print("шаг поиска ", i)
+        if ld["name"] == params:
+            print("Нашли нужную кнгиу")
+            print(ld["author"], ld["year"])
+            print(ld)
+            print(listOfbooks)
+            print("i = ", i)
+            found = True
             break
-        elif typeOfDelete == "by id":
-            id = input()
-            # Код, который удаляет книгу по id
-            break
-        elif typeOfDelete == "last":
-            print("last")
-            # Код, который удаляет последнюю книгу
-            break
-        else:
-            print("Нет такой команды для удаления книги. попробуйте еще раз")
-            break
-    # удалить по имени книги
-    # удалить по id книги
-    # удалить последнюю добавленную книгу
+        i += 1
+    if found:
+        print("Элемент для удаления. Значение i здесь  = ", i)
+        print(listOfbooks.pop(i))
+        print("Кинга удалена")
+        saveBooks(listOfbooks)
+        return "success delete"
+    else:
+        print("Такой эелемент не найден. Попробуйте еще раз")
+        return "no such element"
+
+
 def add(listOfbooks, params):
     params = params.split(" ")
     print(params)
@@ -69,7 +49,7 @@ def printAll(listOfbooks):
         print("Автор: ", l["author"])
         print("Год издания: ", l["year"])
         print("\n")
-        res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) +"\nГод издания: " + str(l["year"])
+        res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) +"\nГод издания: " + str(l["year"]) + "\n\n"
     print("будет возращать сообщение: ", res)
     return res
 def saveBooks(listOfbooks):

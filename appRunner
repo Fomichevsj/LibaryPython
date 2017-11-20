@@ -1,4 +1,0 @@
-from servereModule import  startServer
-from Client import runClient
-
-startServer()
