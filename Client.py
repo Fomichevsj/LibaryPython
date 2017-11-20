@@ -40,6 +40,13 @@ while True:
         sock.send(bytearray(bookName, "utf-8"))
         data = sock.recv(1024)
         print("Ответ от сервера: ", str(data, "utf-8"))
+    elif cmd == "find":
+        print("Введите имя киниги для поиска")
+        bookName = input()
+        sock.send(b"find")
+        sock.send(bytearray(bookName, "utf-8"))
+        data = sock.recv(1024)
+        print("Ответ от сервера: ", str(data, "utf-8"))
     else:
         print("отправляем команду")
         sock.send(bytearray(cmd, "utf-8"))

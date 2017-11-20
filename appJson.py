@@ -1,5 +1,5 @@
 import json
-from Helpers.HelpOperations import delete, add, printAll, saveBooks
+from Helpers.HelpOperations import delete, add, printAll, saveBooks, find
 
 
 def run(command, listOfbooks, params):
@@ -23,6 +23,8 @@ def run(command, listOfbooks, params):
             return msg
         elif command == "find":
             print("appJson: find book")
+            msg = find(listOfbooks, params)# Найти книгу по имени
+            return msg
         elif command == "save":
             saveBooks(listOfbooks)# Сохранить изменения в книгах
             return "save completed"

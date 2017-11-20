@@ -24,6 +24,28 @@ def delete(listOfbooks, params):
         print("Такой эелемент не найден. Попробуйте еще раз")
         return "no such element"
 
+def find(listOfbooks, params):
+    i = 0
+    found = False
+    for ld in listOfbooks:
+        print("шаг поиска ", i)
+        if ld["name"] == params:
+            print("Нашли нужную кнгиу")
+            print(ld["author"], ld["year"])
+            print(ld)
+            print(listOfbooks)
+            print("i = ", i)
+            found = True
+            break
+        i += 1
+    if found:
+        print("Нашли нашу книгу. Значение i здесь  = ", i)
+        res = "Книга найдена\n" + "Название: " + ld["name"] + "\nАвтор: " + ld["author"] \
+              + "\nГод издания: " + str(ld["year"]) + "\nИздательский дом: " + ld["publish home"] + "\n"
+        return res
+    else:
+        print("Такой эелемент не найден. Попробуйте еще раз")
+        return "no such element"
 
 def add(listOfbooks, params):
     params = params.split(" ")
