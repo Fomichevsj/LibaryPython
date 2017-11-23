@@ -24,6 +24,11 @@ def delete(listOfbooks, params):
         print("Такой эелемент не найден. Попробуйте еще раз")
         return "no such element"
 
+#Подсчет числа элементов книг в библиотеке
+def count(listOfbooks):
+    return len(listOfbooks)
+    print(len(listOfbooks))
+
 def find(listOfbooks, params):
     i = 0
     found = False

@@ -42,7 +42,7 @@ while True:
         if msg == "no such command":
             conn.send(b"no such command")
         print("msg from func: ", msg)
-        conn.send(bytearray(msg, "utf-8"))
+        conn.send(bytearray(str(msg), "utf-8"))
 
 
 conn.close()
