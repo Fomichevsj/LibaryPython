@@ -5,7 +5,7 @@ from appJson import run
 print("стартуем сервер")
 sock = socket.socket()
 sock.bind(('', 9090))
-sock.listen(1)
+sock.listen(2)
 conn, addr = sock.accept()
 
 print('connected:', addr)
@@ -21,7 +21,7 @@ while True:
         paramsstr = conn.recv(1024)
         paramsstr = str(paramsstr, "utf-8")
         msg = run(str(data.decode("utf-8")),listOfbooks, paramsstr)
-        conn.send(bytearray(msg,"utf-8"))
+        conn.send(bytearray(msg, "utf-8"))
         continue
     elif data == b"delete":
         print("Будем удалять кигу по имени")
@@ -40,9 +40,9 @@ while True:
     else:
         msg = run(str(data.decode("utf-8")), listOfbooks, "")
         if msg == "no such command":
-            conn.send(b"no such command")
+            conn.send(bytearray(msg, "utf-8"))
         print("msg from func: ", msg)
-        conn.send(bytearray(str(msg), "utf-8"))
+        conn.send(bytearray(msg, "utf-8"))
 
 
 conn.close()
