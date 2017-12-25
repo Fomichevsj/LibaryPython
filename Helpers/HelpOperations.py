@@ -84,5 +84,5 @@ def saveBooks(listOfbooks):
     print("Список книг теперь такой:\n", listOfbooks)
     data = {}
     data['books'] = listOfbooks
-    with open('books.json', 'w') as outfile:
+    with open('C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json', 'w') as outfile:
         json.dump(data, outfile)

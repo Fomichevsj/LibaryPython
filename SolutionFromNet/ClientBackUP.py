@@ -2,6 +2,8 @@ import socket
 import threading
 import sys
 
+import time
+
 host = "localhost"
 port = 1080
 sock = socket.socket()
@@ -40,11 +42,13 @@ def Sender():
             publis_house = input()
             sock.send(b"add")
             res = name + " " + author + " " + str(date) + " " + publis_house
+            time.sleep(2)
             sock.send(bytearray(res, "utf-8"))#Послать сообщение на сервер
         elif cmd == "delete" or cmd == "3":
             print("Введите имя киниги для удаления")
             bookName = input()
             sock.send(b"delete")
+            time.sleep(2)
             sock.send(bytearray(bookName, "utf-8"))
         elif cmd == "find" or cmd == "4":
             print("Введите имя киниги для поиска")

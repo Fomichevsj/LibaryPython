@@ -7,7 +7,7 @@ def run(command, listOfbooks, params):
         #print("Введите команду")
         #command = input()
         #if command == "start":
-        json_data = open("C:\\Users\\User\\PycharmProjects\\LibaryPython\\books.json")  # Загружаем файл
+        json_data = open("C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json")  # Загружаем файл
         d = json.load(json_data)
         listOfbooks = d["books"]
         print("Поступившая комманда: ", command)
@@ -15,6 +15,7 @@ def run(command, listOfbooks, params):
             msg = printAll(listOfbooks) # Напечатать информацию о книге
             return msg
         elif command == "add":
+            print('Добавим книггу')
             listOfbooks = add(listOfbooks, params)#Добавить книгу. Для описания функции. Смотреть соответствующий файл
             saveBooks(listOfbooks)
             return "add completed. Input print all to see."
