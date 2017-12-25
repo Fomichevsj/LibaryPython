@@ -37,11 +37,14 @@ def Sender():
         if data:
             for i in range(len(conn)):
                 print('Отправляю клиенту: ', i)
-                conn[i].send("Ответ от сервака".encode())
+                ans = "Ответ от сервака".encode() + data
+                conn[i].send(ans)
             data = 0
 
 def Accepter():
     while 1:
+        time.sleep(2)
+        print('in accepter')
         global conn
         conn.append(sock.accept()[0])
         print("Подключено пользователй:", len(conn))

@@ -1,6 +1,6 @@
 import threading
 
-from ServerCopy import server
+from ServerFunction import server
 
 
 def writer(x, event_for_wait, event_for_set):
