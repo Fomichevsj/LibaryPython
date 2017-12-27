@@ -82,7 +82,7 @@ def printAll(listOfbooks):
         print("Издатеьский дом: ", l["publish home"])
         print("\n")
         res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) \
-              +"\nИндетификатор: " + str(l["id"]) + "\nИздательский дом: " + str(l["publish home"]) + "\nГод: " + str(l["year"])+ "\n\n"
+              +"\nИндетификатор: " + str(l["id"]) + "\nИздательский дом: " + str(l["publish home"]) + "\nКоличество: " + str(l["count"])+ "\nГод: " + str(l["year"]) + "" +"\n\n"
     print("будет возращать сообщение: ", res)
     return res
 def saveBooks(listOfbooks):

@@ -1,1 +1,68 @@
-{"books": [{"id": 642451, "name": "hello", "publish home": "moscow", "author": "pushkin", "year": 1994}, {"id": 2341523512343, "name": "another name", "publish home": "moscow", "author": "tolstoy", "year": 1898}, {"id": 234152, "name": "name", "publish home": "moscow", "author": "ogon", "year": 1848}, {"id": 345206, "name": "my book", "publish home": "Moscow", "author": "Sergey F", "year": 1987}, {"id": 564560, "name": "Under F", "publish home": "Boston", "author": "SergeF", "year": 1943}, {"id": 0, "name": "novay", "publish home": "gaza", "author": "volna", "year": 2017}, {"id": 0, "name": "diasd", "publish home": "gggg", "author": "yyyew", "year": 1823}, {"id": 1514409116039, "name": "bull", "publish home": "ril", "author": "king", "year": 18234}, {"id": 1514409149107, "name": "morzh", "publish home": "gqwer", "author": "tttw", "year": 2841}]}
+{
+  "books": [
+    {
+      "id": 642451,
+      "name": "hello",
+      "publish home": "moscow",
+      "author": "pushkin",
+      "year": 1994,
+      "count": 23
+    },
+    {
+      "id": 2341523512343,
+      "name": "another name",
+      "publish home": "moscow",
+      "author": "tolstoy",
+      "year": 1898,
+      "count": 2
+    },
+    {
+      "id": 234152,
+      "name": "name",
+      "publish home": "moscow",
+      "author": "ogon",
+      "year": 1848,
+      "count": 3
+    },
+    {
+      "id": 345206,
+      "name": "my book",
+      "publish home": "Moscow",
+      "author": "Sergey F",
+      "year": 1987,
+      "count": 53
+    },
+    {
+      "id": 564560,
+      "name": "Under F",
+      "publish home": "Boston",
+      "author": "SergeF",
+      "year": 1943,
+      "count": 23
+    },
+    {
+      "id": 23063,
+      "name": "novay",
+      "publish home": "gaza",
+      "author": "volna",
+      "year": 2017,
+      "count": 12
+    },
+    {
+      "id": 53510,
+      "name": "diasd",
+      "publish home": "gggg",
+      "author": "yyyew",
+      "year": 1823,
+      "count": 53
+    },
+    {
+      "id": 1514409149107,
+      "name": "morzh",
+      "publish home": "gqwer",
+      "author": "tttw",
+      "year": 2841,
+      "count": 63
+    }
+  ]
+}
