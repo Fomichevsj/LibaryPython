@@ -81,8 +81,8 @@ def SenderAndRecier():
                     print('Пришло сообщение!')
                     print(data.decode())
                     print('Отправляю клиенту: ', i)
-                    ans = "Ответ от сервака: ".encode() + data + "\n".encode()
-                    ready[0][0].send(ans)
+                    #ans = "Ответ от сервака: ".encode() + data + "\n".encode()
+                    #ready[0][0].send(ans)
                     data = 0
             except socket.error as e:
                 if e.errno == 10053:

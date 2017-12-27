@@ -17,20 +17,28 @@ host = "localhost"
 port = 1080
 sock = socket.socket()
 sock.connect((host, port))
+bollShutDown = False
 
 def Reciver():
+    global bollShutDown
     while 1:
+        if bollShutDown:
+            print("До свидания")
+            exit(0)
         data = sock.recv(1024)
         if data:
             print(data.decode())
 
 def Sender():
+    global bollShutDown
     while 1:
         print("Введите комманду")
         cmd = input()
         if cmd == "exit" or cmd == "5":
             #sock.send(b"exit")
             #sock.close()
+            bollShutDown = True
+            print('Выходим')
             exit(0)
         if cmd == "add" or cmd == "2":
             print("Введите необходимые данные для книги", end="\n")
@@ -65,6 +73,7 @@ def Sender():
             sock.send(b"find")
             time.sleep(2)
             sock.send(bytearray(bookName, "utf-8"))
+            time.sleep(2)
         elif cmd == "help" or cmd == "6":
             print("""В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
@@ -75,9 +84,25 @@ def Sender():
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
         8. save - Сохранить сделанные изменения""")
-        else:
-            print("отправляем команду")
+        elif cmd == "print all" or cmd == "1":
             sock.send(bytearray(cmd, "utf-8"))
+            time.sleep(2)
+        elif cmd == "count" or cmd == "7":
+            sock.send(bytearray(cmd, "utf-8"))
+            time.sleep(2)
+        elif cmd == "save" or cmd == "8":
+            sock.send(bytearray(cmd, "utf-8"))
+        else:
+            print("Нет такой команды. повотрите заново.")
+            print("""В данной программе доступны следующие функции:
+                    1. print all - Вывести на экран все киниг
+                    2. add - Добавить книгу
+                    3. delete - Удалить книгу по ее названию
+                    4. find - Найти книгу по ее названию
+                    5. exit - Выход из программы
+                    6. help - просмотр меню
+                    7. count - Вывести количество всех книг в базе
+                    8. save - Сохранить сделанные изменения""")
 
 t1 = threading.Thread(target=Reciver)
 t2 = threading.Thread(target=Sender)

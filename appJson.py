@@ -7,7 +7,7 @@ def run(command, listOfbooks, params):
         #print("Введите команду")
         #command = input()
         #if command == "start":
-        json_data = open("C:\\Users\\Nic\\Desktop\\DDZ\\ProjRelease2\\LibaryPython\\Resources\\books.json")  # Загружаем файл
+        json_data = open("C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json")  # Загружаем файл
         d = json.load(json_data)
         listOfbooks = d["books"]
         print("Поступившая комманда: ", command)

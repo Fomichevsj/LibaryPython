@@ -75,8 +75,10 @@ def printAll(listOfbooks):
         print("Имя книги: ", l["name"])
         print("Автор: ", l["author"])
         print("Год издания: ", l["year"])
+        print("Издатеьский дом: ", l["publish home"])
         print("\n")
-        res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) +"\nГод издания: " + str(l["year"]) + "\n\n"
+        res = res +"Инфо о книге:\n" + "Имя книги: " + str(l["name"]) + "\nАвтор: " + str(l["author"]) \
+              +"\nГод издания: " + str(l["year"]) + "\nИздательский дом: " + str(l["publish home"])+ "\n\n"
     print("будет возращать сообщение: ", res)
     return res
 def saveBooks(listOfbooks):
@@ -84,5 +86,5 @@ def saveBooks(listOfbooks):
     print("Список книг теперь такой:\n", listOfbooks)
     data = {}
     data['books'] = listOfbooks
-    with open('C:\\Users\\Nic\\Desktop\\DDZ\\ProjRelease2\\LibaryPython\\Resources\\books.json', 'w') as outfile:
+    with open('C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json', 'w') as outfile:
         json.dump(data, outfile)
