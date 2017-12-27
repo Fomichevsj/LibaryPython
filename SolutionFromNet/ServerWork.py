@@ -9,19 +9,24 @@ import select
 from appJson import run
 
 sock = socket.socket()
-sock.bind(('', 1080))
-sock.listen(3)
-#sock.setblocking(0)
+try:
+    sock.bind(('', 1080))
+except OSError:
+    print("Нельзя делать более одного подключения сервера")
+    exit(1)
+sock.listen(20)
 conn = []
 data = ''
 listOfbooks = []
 boolWasAddCommand = False
 boolWasDeleteCommand = False
+bollWasFindCommand = False
 def SenderAndRecier():
     global data
     global conn
     global boolWasAddCommand
     global boolWasDeleteCommand
+    global bollWasFindCommand
     while 1:
         print('in reciever')
         time.sleep(2)
@@ -47,16 +52,32 @@ def SenderAndRecier():
                         msg = run("delete", listOfbooks, data.decode("utf-8"))
                         ready[0][0].send(msg.encode())
                         boolWasDeleteCommand = False
-                    if data == "add".encode():
+                    if bollWasFindCommand:
+                        print('Прошлая команда была о поиске киги')
+                        msg = run("find", listOfbooks, data.decode("utf-8"))
+                        ready[0][0].send(msg.encode())
+                        bollWasFindCommand = False
+                    if data == "add".encode() or data == "2".encode():
                         print('Мы должны добавить книгу в библиоткеу!')
                         boolWasAddCommand = True
-                    if data == "delete".encode():
+                    if data == "delete".encode() or data == "3".encode():
                         print('Мы должны удалить книгу из библиотеки')
                         boolWasDeleteCommand = True
-                    if data == "print all".encode():
+                    if data == "find".encode() or data == "4".encode():
+                        print('Нужно найти книгу')
+                        bollWasFindCommand = True
+                    if data == "print all".encode() or data == "1".encode():
                         print('Должны напечатать все книги')
                         msg = run(str(data.decode("utf-8")), listOfbooks, "")
                         ready[0][0].send(msg.encode())
+                    if data == "count".encode() or data == "7".encode():
+                        print("Подсчет числа книг")
+                        msg = run(str(data.decode("utf-8")), listOfbooks, "")
+                        ready[0][0].send(str(msg).encode())#Возращает число
+                    if data == "save".encode() or data == "8".encode():
+                        print("Сохраняем файл")
+                        msg = run("save", listOfbooks, "")
+                        ready[0][0].send(str(msg).encode())
                     print('Пришло сообщение!')
                     print(data.decode())
                     print('Отправляю клиенту: ', i)
@@ -79,14 +100,8 @@ def Accepter():
         print("Подключено пользователй:", len(conn))
 
 
-# init threads
-#t1 = threading.Thread(target=Reciver)
-#t2 = threading.Thread(target=Sender)
 t11 = threading.Thread(target=SenderAndRecier)
 t3 = threading.Thread(target=Accepter)
 
-# start threads
-#t1.start()
-#t2.start()
 t11.start()
 t3.start()

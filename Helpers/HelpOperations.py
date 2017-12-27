@@ -60,7 +60,7 @@ def add(listOfbooks, params):
     print("p3", params[2])
     print("p4", params[3])
     listOfbooks.append({
-        "id": 0,  # Это нужно будет исправить TODO Исправить это
+        "id": 0,
         "name": params[0],
         "publish home": params[3],
         "author": params[1],
@@ -84,5 +84,5 @@ def saveBooks(listOfbooks):
     print("Список книг теперь такой:\n", listOfbooks)
     data = {}
     data['books'] = listOfbooks
-    with open('C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json', 'w') as outfile:
+    with open('C:\\Users\\Nic\\Desktop\\DDZ\\ProjRelease2\\LibaryPython\\Resources\\books.json', 'w') as outfile:
         json.dump(data, outfile)
