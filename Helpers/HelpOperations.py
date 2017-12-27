@@ -62,13 +62,19 @@ def add(listOfbooks, params):
     print("p2 ", params[1])
     print("p3", params[2])
     print("p4", params[3])
+    for i in listOfbooks:
+        if i["name"] == params[0] and i["author"]  == params[1] and str(i["year"]) == str(params[2]):
+            print('Нашли нужную книгу. Увеличим число элементов в эой книге')
+            i["count"] = int(i["count"]) + 1
+            return listOfbooks
     millis = int(round(time.time() * 1000))
     listOfbooks.append({
         "id": millis,
         "name": params[0],
         "publish home": params[3],
         "author": params[1],
-        "year": int(params[2])
+        "year": int(params[2]),
+        "count": 1
     })
     print("Список книг после изменения: ", listOfbooks)
     return listOfbooks
