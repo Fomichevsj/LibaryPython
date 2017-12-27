@@ -1,5 +1,8 @@
 import json
 #Файл реализует нужные функции для удалени, добавления, поиска книг в библиотеке
+import time
+
+
 def delete(listOfbooks, params):
     i = 0
     found = False
@@ -59,8 +62,9 @@ def add(listOfbooks, params):
     print("p2 ", params[1])
     print("p3", params[2])
     print("p4", params[3])
+    millis = int(round(time.time() * 1000))
     listOfbooks.append({
-        "id": 0,
+        "id": millis,
         "name": params[0],
         "publish home": params[3],
         "author": params[1],
