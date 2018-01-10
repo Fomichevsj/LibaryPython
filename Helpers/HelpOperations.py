@@ -63,7 +63,7 @@ def add(listOfbooks, params):
     print("p3", params[2])
     print("p4", params[3])
     for i in listOfbooks:
-        if i["name"] == params[0] and i["author"]  == params[1] and str(i["year"]) == str(params[2]):
+        if i["name"] == params[0] and i["author"] == params[1] and str(i["year"]) == str(params[2]):
             print('Нашли нужную книгу. Увеличим число элементов в эой книге')
             i["count"] = int(i["count"]) + 1
             return listOfbooks
@@ -96,5 +96,5 @@ def saveBooks(listOfbooks):
     print("Список книг теперь такой:\n", listOfbooks)
     data = {}
     data['books'] = listOfbooks
-    with open('C:\\Users\\User\\PycharmProjects\\Army\\LibaryPython\\Resources\\books.json', 'w') as outfile:
+    with open('/Users/fomichevalexey/PycharmProjects/LibaryPython/SolutionFromNet/books.json', 'w') as outfile:
         json.dump(data, outfile)
