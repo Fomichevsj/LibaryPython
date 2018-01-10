@@ -11,7 +11,8 @@ print("""В данной программе доступны следующие 
         5. exit - Выход из программы
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
-        8. save - Сохранить сделанные изменения""")
+        8. save - Сохранить сделанные изменения
+        9. print - Вывести на экран информацию о книге""")
 
 host = "localhost"
 port = 1080
@@ -70,6 +71,9 @@ def Sender():
         elif cmd == "find" or cmd == "4":
             print("Введите имя киниги для поиска")
             bookName = input()
+            if bookName == "":
+                print("вы не ввели имя книги. Попробуйте снова.")
+                continue
             sock.send(b"find")
             time.sleep(2)
             sock.send(bytearray(bookName, "utf-8"))
@@ -83,9 +87,19 @@ def Sender():
         5. exit - Выход из программы
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
-        8. save - Сохранить сделанные изменения""")
+        8. save - Сохранить сделанные изменения
+        9. print - Вывести на экран информацию о книге""")
         elif cmd == "print all" or cmd == "1":
             sock.send(bytearray(cmd, "utf-8"))
+            time.sleep(2)
+        elif cmd == "print" or cmd == '9':
+            bookToFind = input('Введите имя киниги: ')
+            if bookToFind == "":
+                print('Вы не ввели имя книгию. Попробуйте снова.')
+                continue
+            sock.send(b'find')#используем команду find тк она по сути выполняет теже функции
+            time.sleep(2)
+            sock.send(bytearray(bookToFind, "utf-8"))
             time.sleep(2)
         elif cmd == "count" or cmd == "7":
             sock.send(bytearray(cmd, "utf-8"))
@@ -102,7 +116,8 @@ def Sender():
                     5. exit - Выход из программы
                     6. help - просмотр меню
                     7. count - Вывести количество всех книг в базе
-                    8. save - Сохранить сделанные изменения""")
+                    8. save - Сохранить сделанные изменения
+                    9. print - Вывести на экран информацию о книге""")
 
 t1 = threading.Thread(target=Reciver)
 t2 = threading.Thread(target=Sender)

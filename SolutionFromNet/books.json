@@ -1,1 +1,92 @@
-{"books": [{"id": 1, "name": "hello", "publish home": "moscow", "author": "pushkin", "year": 1994}, {"id": 3, "name": "another name", "publish home": "moscow", "author": "tolstoy", "year": 1898}, {"id": 2, "name": "name", "publish home": "moscow", "author": "ogon", "year": 1848}, {"id": 0, "name": "my book", "publish home": "Moscow", "author": "Sergey F", "year": 1987}, {"id": 0, "name": "Under F", "publish home": "Boston", "author": "SergeF", "year": 1943}, {"id": 0, "name": "novay", "publish home": "gaza", "author": "volna", "year": 2017}, {"id": 0, "name": "Annd", "publish home": "piter", "author": "Karenina", "year": 1982}, {"id": 0, "name": "DedMrz", "publish home": "Sib", "author": "Sneg", "year": 1923}, {"id": 0, "name": "Bum", "publish home": "qwvs", "author": "Snik", "year": 1823}, {"id": 0, "name": "erw", "publish home": "zxv", "author": "poiu", "year": 38423}, {"id": 0, "name": "pqwer", "publish home": "vvvvv", "author": "vasdf", "year": 432}]}
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "hello",
+      "publish home": "moscow",
+      "author": "pushkin",
+      "year": 1994,
+      "count":1
+    },
+    {
+      "id": 3,
+      "name": "another name",
+      "publish home": "moscow",
+      "author": "tolstoy",
+      "year": 1898,
+      "count":63
+    },
+    {
+      "id": 2,
+      "name": "name",
+      "publish home": "moscow",
+      "author": "ogon",
+      "year": 1848,
+      "count": 24
+    },
+    {
+      "id": 0,
+      "name": "my book",
+      "publish home": "Moscow",
+      "author": "Sergey F",
+      "year": 1987,
+      "count":23
+    },
+    {
+      "id": 0,
+      "name": "Under F",
+      "publish home": "Boston",
+      "author": "SergeF",
+      "year": 1943,
+      "count":63
+    },
+    {
+      "id": 0,
+      "name": "novay",
+      "publish home": "gaza",
+      "author": "volna",
+      "year": 2017,
+      "count": 12
+    },
+    {
+      "id": 0,
+      "name": "Annd",
+      "publish home": "piter",
+      "author": "Karenina",
+      "year": 1982,
+      "count":42
+    },
+    {
+      "id": 0,
+      "name": "DedMrz",
+      "publish home": "Sib",
+      "author": "Sneg",
+      "year": 1923,
+      "count":23
+    },
+    {
+      "id": 0,
+      "name": "Bum",
+      "publish home": "qwvs",
+      "author": "Snik",
+      "year": 1823,
+      "count": 72
+    },
+    {
+      "id": 0,
+      "name": "erw",
+      "publish home": "zxv",
+      "author": "poiu",
+      "year": 38423,
+      "count": 7
+    },
+    {
+      "id": 0,
+      "name": "pqwer",
+      "publish home": "vvvvv",
+      "author": "vasdf",
+      "year": 432,
+      "count": 12
+    }
+  ]
+}
