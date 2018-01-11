@@ -1,5 +1,5 @@
 import json
-from Helpers.HelpOperations import delete, add, printAll, saveBooks, find, count
+from Helpers.HelpOperations import delete, add, printAll, saveBooks, find, count, update
 
 
 def run(command, listOfbooks, params):
@@ -33,6 +33,9 @@ def run(command, listOfbooks, params):
             print("appJson: Завершаю программу")
             saveBooks(listOfbooks)
             return listOfbooks
+        elif command == "update":
+            msg = update(listOfbooks, params)
+            return msg
         elif command == "count" or command == "7":
             cnt = count(listOfbooks)
             return cnt

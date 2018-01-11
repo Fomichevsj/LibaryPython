@@ -91,6 +91,16 @@ def printAll(listOfbooks):
               +"\nИндетификатор: " + str(l["id"]) + "\nИздательский дом: " + str(l["publish home"]) + "\nКоличество: " + str(l["count"])+ "\nГод: " + str(l["year"]) + "" +"\n\n"
     print("будет возращать сообщение: ", res)
     return res
+def update(listOfbooks, params):
+    params = params.split("|")
+    #Здесь нужно закончить обновление книги. Нужно найти нужную книгу в цикле и обновить у нее поле. Имя поля хранится во втором параметре
+    for l in listOfbooks: #l это очередная книга
+        if l["name"] == params[0]:
+            print('Нашли нужную книгу. Обновим ее поле.')
+            l[params[1]] = params[2]# Поставить новое значение
+            saveBooks(listOfbooks)
+            return 'update completed'
+    print('')
 def saveBooks(listOfbooks):
     print("Тип listOfBooks = ", type(listOfbooks))
     print("Список книг теперь такой:\n", listOfbooks)

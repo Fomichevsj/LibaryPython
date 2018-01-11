@@ -21,12 +21,15 @@ listOfbooks = []
 boolWasAddCommand = False
 boolWasDeleteCommand = False
 bollWasFindCommand = False
+boolWasUpdateCommand = False
 def SenderAndRecier():
     global data
     global conn
     global boolWasAddCommand
     global boolWasDeleteCommand
     global bollWasFindCommand
+    global boolWasUpdateCommand
+
     while 1:
         print('in reciever')
         time.sleep(2)
@@ -47,6 +50,12 @@ def SenderAndRecier():
                         msg = run("add", listOfbooks, data.decode("utf-8"))
                         ready[0][0].send(msg.encode())
                         boolWasAddCommand = False
+                    if boolWasUpdateCommand:
+                        print('Прошлая команда была: обновить книгу')
+                        print('Данные для обновлени киниги: ', data.decode('utf-8'))
+                        msg = run("update", listOfbooks, data.decode("utf-8"))
+                        ready[0][0].send(msg.encode())
+                        boolWasUpdateCommand = False
                     if boolWasDeleteCommand:
                         print('Прошлая команда была: удалить книгу')
                         msg = run("delete", listOfbooks, data.decode("utf-8"))
@@ -60,6 +69,9 @@ def SenderAndRecier():
                     if data == "add".encode() or data == "2".encode():
                         print('Мы должны добавить книгу в библиоткеу!')
                         boolWasAddCommand = True
+                    if data == "update".encode() or data == "10".encode():
+                        print('Мы должны обновить книгу')
+                        boolWasUpdateCommand = True
                     if data == "delete".encode() or data == "3".encode():
                         print('Мы должны удалить книгу из библиотеки')
                         boolWasDeleteCommand = True

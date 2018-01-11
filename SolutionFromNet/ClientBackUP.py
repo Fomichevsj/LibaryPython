@@ -12,7 +12,8 @@ stringMenu = """В данной программе доступны следую
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
         8. save - Сохранить сделанные изменения
-        9. print - Вывести на экран информацию о книге"""
+        9. print - Вывести на экран информацию о книге
+        10. update - Изменить информацию о книге"""
 
 print("""В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
@@ -23,7 +24,8 @@ print("""В данной программе доступны следующие 
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
         8. save - Сохранить сделанные изменения
-        9. print - Вывести на экран информацию о книге""")
+        9. print - Вывести на экран информацию о книге
+        10. update - Изменить информацию о книге""")
 
 host = "localhost"
 port = 1080
@@ -75,15 +77,29 @@ def Sender():
                 continue
             else:
                 print('Книга была найдена')
-            print('Введите поле, которое хотите обновить: ')
+            print('Введите поле, которое хотите обновить.')
+            print("""Доступны следующие варианты: 
+            name - название книги
+            author - автор книги
+            year - год издания книги
+            publish home - Изадтельскиц дом
+            count - Количество экземпляров книги""")
             fieldToUpdate = input()
             if fieldToUpdate == '':
                 print('Вы не ввели поле, которое хотите обновить. Попробуйте использовать команду заново.')
                 print(stringMenu)
                 continue
+            if fieldToUpdate not in ["year", "author", "name", "publish home"]:
+                print('Нет поля с названием ', fieldToUpdate, '. Попробуйте заново вызвать команду.')
+                print(stringMenu)
+                continue
+            print('Введите новое значение поля.')
+            newValue = input()
             sock.send(b'update')
             time.sleep(2)
-            sock.send(bytearray(bookToUpdate + " " + fieldToUpdate, "utf-8"))
+            sock.send(bytearray(bookToUpdate + "|" + fieldToUpdate + "|"+ newValue, "utf-8"))
+            time.sleep(2)
+            continue
         if cmd == "add" or cmd == "2":
             print("Введите необходимые данные для книги", end="\n")
             print("\tВведите название книги: ", end='')
@@ -116,6 +132,7 @@ def Sender():
             res = name + " " + author + " " + str(date) + " " + publis_house
             time.sleep(2)
             sock.send(bytearray(res, "utf-8"))#Послать сообщение на сервер
+            time.sleep(2)
         elif cmd == "delete" or cmd == "3":
             print("Введите имя киниги для удаления")
             bookName = input()
@@ -147,7 +164,7 @@ def Sender():
             sock.send(bytearray(cmd, "utf-8"))
             time.sleep(2)
         elif cmd == "print" or cmd == '9':
-            bookToFind = input('Введите имя киниги: ')
+            bookToFind = input('Введите имя книги: ')
             if bookToFind == "":
                 print('Вы не ввели имя книгию. Попробуйте снова.')
                 continue
