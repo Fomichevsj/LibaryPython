@@ -55,6 +55,29 @@ def find(listOfbooks, params):
         print("Такой эелемент не найден. Попробуйте еще раз")
         return "no such element"
 
+def findComplex(listOfbooks, params):
+    params = params.split('|')
+    #Ожидается, что получили 3 параметра
+    # 1 параметр - название книги
+    # 2 параметр - автор книги
+    # 4 параметр - год издания книги
+    print('Параметры сложного поиска: ', params)
+    res = ''
+    cnt = 0
+    if len(params) != 3:
+        return 'BadParams'
+    for ld in listOfbooks:
+        if ld["name"] == str(params[0]) and ld["author"] == str(params[1]) and str(ld["year"]) == str(params[2]):
+            res = res + "Название: " + ld["name"] + "\nАвтор: " + ld["author"] \
+              + "\nГод издания: " + str(ld["year"]) + "\nИздательский дом: " + ld["publish home"] + "\n" \
+              + "Количество экземпляров: " + str(ld["count"]) + "\n\n"
+            cnt = cnt + 1#количество книг по запросу больше увеличиваем на одну
+    if cnt == 0:
+        return 'Нет результатов поиска. Попробуйте уточнить поиск.'
+    else:
+        return 'По вашему запросу найдено ' + str(cnt) + ' книг:\n' + res
+
+
 def add(listOfbooks, params):
     params = params.split("|")
     print(params)
@@ -63,7 +86,7 @@ def add(listOfbooks, params):
     print("p3", params[2])
     print("p4", params[3])
     for i in listOfbooks:
-        if i["name"] == params[0] and i["author"] == params[1] and str(i["year"]) == str(params[2]):
+        if i["name"] == params[0] and i["author"] == params[1] and str(i["year"]) == str(params[2]) and str(i["publish home"]) == str(params[3]):
             print('Нашли нужную книгу. Увеличим число элементов в эой книге')
             i["count"] = int(i["count"]) + 1
             return listOfbooks

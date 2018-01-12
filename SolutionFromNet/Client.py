@@ -20,7 +20,7 @@ stringMenu = """В данной программе доступны следую
 print(stringMenu)
 
 host = "localhost"
-port = 1080
+port = 8080
 sock = socket.socket()
 sock.connect((host, port))
 bollShutDown = False
@@ -138,9 +138,18 @@ def Sender():
             if bookName == "":
                 print("вы не ввели имя книги. Попробуйте снова.")
                 continue
+            bookAuthorForFind = input('Введите автора книги: ')
+            if bookAuthorForFind == '':
+                print('Вы не ввели автора книги. Это поле являетася обязательным. Попробуйте снова выполнить команду.')
+                continue
+            bookYearForFind = input('Введтие год издания книги: ')
+            if bookYearForFind == '':
+                print('Вы не ввели год издания книги. Это поле являетася обязательным. Попробуйте снова выполнить команду.')
+                continue
+            serverMsg = bookName + "|" + bookAuthorForFind + '|' + bookYearForFind#Параметры которые будем отправлять на сервер
             sock.send(b"find")
             time.sleep(2)
-            sock.send(bytearray(bookName, "utf-8"))
+            sock.send(bytearray(serverMsg, "utf-8"))
             time.sleep(2)
         elif cmd == "help" or cmd == "6":
             print(stringMenu)

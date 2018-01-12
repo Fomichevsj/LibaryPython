@@ -11,7 +11,7 @@ from appJson import run
 sock = socket.socket()
 #sock.bind(('', 1080))
 try:
-    sock.bind(('', 1080))
+    sock.bind(('', 8080))
 except OSError:
     print("Нельзя делать более одного подключения сервера")
     exit(1)
