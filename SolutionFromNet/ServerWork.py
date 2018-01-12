@@ -9,6 +9,7 @@ import select
 from appJson import run
 
 sock = socket.socket()
+#sock.bind(('', 1080))
 try:
     sock.bind(('', 1080))
 except OSError:
@@ -37,12 +38,13 @@ def SenderAndRecier():
             print('слушаем клиента ', i)
             try:
                 ready = select.select(list(conn), [], [], 4)
-                print('Попытаемся получить сообщение 2')
+                print('Попытаемся получить сообщение.')
                 print(ready[0])
-                print(conn[i])
+                #print(conn[i])
                 if ready[0]:
                     data = ready[0][0].recv(1024)
-                    print('Клиент', i,  'активен. Получили сообщение.')
+                    print('Количество подключений: ', len(conn))
+                    print('Клиент', i,  'активен. Получили сообщение. -> ', data.decode('utf-8'))
                 if data:
 
                     if boolWasAddCommand:
@@ -86,16 +88,27 @@ def SenderAndRecier():
                         print("Подсчет числа книг")
                         msg = run(str(data.decode("utf-8")), listOfbooks, "")
                         ready[0][0].send(str(msg).encode())#Возращает число
+                    if data == "exit".encode() or data == "5":
+                        ready[0][0].send('okGoodbye'.encode())
+                        #ready[0][0].close()
+                        for j in range(len(conn)):
+                            print('Сравниваем коннекшин ', j)
+                            if conn[j] == ready[0][0]:
+                                conn.pop(j)
+                                print('Клиент ', j, ' Разорвал соединение')
+                                print('Теперь количество клиентов: ', len(conn))
+                                break
                     if data == "save".encode() or data == "8".encode():
                         print("Сохраняем файл")
                         msg = run("save", listOfbooks, "")
                         ready[0][0].send(str(msg).encode())
                     print('Пришло сообщение!')
                     print(data.decode())
-                    print('Отправляю клиенту: ', i)
+                    #print('Отправляю клиенту: ', i)
                     #ans = "Ответ от сервака: ".encode() + data + "\n".encode()
                     #ready[0][0].send(ans)
                     data = 0
+                ready = None
             except socket.error as e:
                 if e.errno == 10053:
                     conn.pop(i)

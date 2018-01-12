@@ -3,6 +3,8 @@ import threading
 import sys
 import time
 
+import select
+
 stringMenu = """В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
         2. add - Добавить книгу
@@ -38,6 +40,7 @@ def Reciver():
     global bollShutDown
     global boolNoSuchElement
     while 1:
+        data = None
         if bollShutDown:
             print("До свидания")
             exit(0)
@@ -54,11 +57,11 @@ def Sender():
         print("Введите комманду")
         cmd = input()
         if cmd == "exit" or cmd == "5":
-            #sock.send(b"exit")
+            sock.send(b"exit")
             #sock.close()
             bollShutDown = True
             print('Выходим')
-            exit(0)
+            break
         if cmd == "update" or cmd == "10":
             print('Введите книгу которую хотите обновить: ')
             bookToUpdate = input()
@@ -159,7 +162,8 @@ def Sender():
         6. help - просмотр меню
         7. count - Вывести количество всех книг в базе
         8. save - Сохранить сделанные изменения
-        9. print - Вывести на экран информацию о книге""")
+        9. print - Вывести на экран информацию о книге
+        10. update - Изменить информацию о книге""")
         elif cmd == "print all" or cmd == "1":
             sock.send(bytearray(cmd, "utf-8"))
             time.sleep(2)
@@ -188,7 +192,8 @@ def Sender():
                     6. help - просмотр меню
                     7. count - Вывести количество всех книг в базе
                     8. save - Сохранить сделанные изменения
-                    9. print - Вывести на экран информацию о книге""")
+                    9. print - Вывести на экран информацию о книге
+                    10. update - Изменить информацию о книге""")
 
 t1 = threading.Thread(target=Reciver)
 t2 = threading.Thread(target=Sender)
