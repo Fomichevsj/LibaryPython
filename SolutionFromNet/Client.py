@@ -5,6 +5,8 @@ import time
 
 import select
 
+from pip._vendor.appdirs import unicode
+
 stringMenu = """В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
         2. add - Добавить книгу
@@ -20,7 +22,7 @@ stringMenu = """В данной программе доступны следую
 print(stringMenu)
 
 host = "localhost"
-port = 8080
+port = 1080
 sock = socket.socket()
 sock.connect((host, port))
 bollShutDown = False
@@ -36,8 +38,8 @@ def Reciver():
             exit(0)
         data = sock.recv(1024)
         if data:
-            print(data.decode())
-            if data.decode() == "no such element":
+            print(unicode(data, errors = 'ignore'))
+            if unicode(data, errors = 'ignore') == "no such element":
                 boolNoSuchElement = True
 
 def Sender():
@@ -94,30 +96,23 @@ def Sender():
             time.sleep(2)
             continue
         if cmd == "add" or cmd == "2":
-            print("Введите необходимые данные для книги", end="\n")
-            print("\tВведите название книги: ", end='')
-            name = input()
+            print("Введите необходимые данные для книги")
+            name = input("\tВведите название книги: ")
             if name == '':
                 print('Вы не ввели имя книги. Попробуйте вызвать команду заново.')
                 print(stringMenu)
                 continue
-            print("")
-            print("\tВведите год издания книги: ", end='')
-            try:
-                date = int(input())
-            except ValueError:
-                print("Дата может быть только числом. Попробуйте заново.")
-                continue
-            print("\tВведите автора книги: ", end='')
-            author = input()
+            author = input("\tВведите автора книги: ")
             if author == "":
                 print('Вы не ввели автора книги. Попробуйте заново.')
                 print(stringMenu)
                 continue
-            print("")
-            print()
-            print("\tВведите издательский дом: ", end='')
-            publis_house = input()
+            try:
+                date = int(input("\tВведите год издания книги: "))
+            except ValueError:
+                print("Дата может быть только числом. Попробуйте заново.")
+                continue
+            publis_house = input("\tВведите издательский дом: ")
             if publis_house == '':
                 print('Вы не ввели издательский дом. Попробуйте заново.')
                 print(stringMenu)
