@@ -56,7 +56,7 @@ def find(listOfbooks, params):
         return "no such element"
 
 def add(listOfbooks, params):
-    params = params.split(" ")
+    params = params.split("|")
     print(params)
     print("p1 ", params[0])
     print("p2 ", params[1])

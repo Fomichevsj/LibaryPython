@@ -132,7 +132,7 @@ def Sender():
                 print('Вы не ввели издательский дом. Попробуйте заново.')
                 print(stringMenu)
             sock.send(b"add")
-            res = name + " " + author + " " + str(date) + " " + publis_house
+            res = name + "|" + author + "|" + str(date) + "|" + publis_house
             time.sleep(2)
             sock.send(bytearray(res, "utf-8"))#Послать сообщение на сервер
             time.sleep(2)
