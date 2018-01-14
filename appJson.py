@@ -3,11 +3,7 @@ from Helpers.HelpOperations import delete, add, printAll, saveBooks, find, count
 
 
 def run(command, listOfbooks, params):
-    #while(True):
-        #print("Введите команду")
-        #command = input()
-        #if command == "start":
-        json_data = open("/Users/fomichevalexey/PycharmProjects/LibaryPython/SolutionFromNet/books.json")  # Загружаем файл
+        json_data = open("C:\\Users\\Nic\\Desktop\\DDZ\\ProjRelease2\\LibaryPython\\SolutionFromNet\\books.json")  # Загружаем файл
         d = json.load(json_data)
         listOfbooks = d["books"]
         print("Поступившая комманда: ", command)

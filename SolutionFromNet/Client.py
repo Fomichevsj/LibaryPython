@@ -5,7 +5,7 @@ import time
 
 import select
 
-from pip._vendor.appdirs import unicode
+from pip._vendor.appdirs import unicode#функция используется для декодировки
 
 stringMenu = """В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
@@ -22,7 +22,7 @@ stringMenu = """В данной программе доступны следую
 print(stringMenu)
 
 host = "localhost"
-port = 1080
+port = 1080#номер порта
 sock = socket.socket()
 sock.connect((host, port))
 bollShutDown = False
@@ -36,9 +36,9 @@ def Reciver():
         if bollShutDown:
             print("До свидания")
             exit(0)
-        data = sock.recv(1024)
+        data = sock.recv(1024)#получаем сообщение от сервера рамзером не боллее 1024 байт
         if data:
-            print(unicode(data, errors = 'ignore'))
+            print(unicode(data, errors = 'ignore'))#игнорируем ошибки при декодировании сообщения, которое приходит
             if unicode(data, errors = 'ignore') == "no such element":
                 boolNoSuchElement = True
 
@@ -49,8 +49,7 @@ def Sender():
         print("Введите комманду")
         cmd = input()
         if cmd == "exit" or cmd == "5":
-            sock.send(b"exit")
-            #sock.close()
+            sock.send(b"exit")#передача сообщения в байтах
             bollShutDown = True
             print('Выходим')
             break
@@ -75,8 +74,8 @@ def Sender():
                 continue
             srvMsg = bookToUpdate + "|" + bookAuthorForUpdate + "|" + bookYearForUpdate + "|" + bookHomeForUpdate
             sock.send(b'hardfind')  # используем команду find тк она по сути выполняет теже функции
-            time.sleep(2)
-            sock.send(bytearray(srvMsg, "utf-8"))
+            time.sleep(2)#останавливаем поток на 2 секунды
+            sock.send(bytearray(srvMsg, "utf-8"))#переводит строчку в массив байтов
             time.sleep(2)
             if boolNoSuchElement == True:# Не смогли найти книгу. Значит и поле вводить не нужно
                 print('Книга не найдена. Попробуйте уточнить поиск.')
@@ -110,7 +109,7 @@ def Sender():
             continue
         if cmd == "add" or cmd == "2":
             print("Введите необходимые данные для книги")
-            name = input("\tВведите название книги: ")
+            name = input("\tВведите название книги: ")#\t- 1 таб
             if name == '':
                 print('Вы не ввели имя книги. Попробуйте вызвать команду заново.')
                 print(stringMenu)
@@ -130,7 +129,7 @@ def Sender():
                 print('Вы не ввели издательский дом. Попробуйте заново.')
                 print(stringMenu)
             sock.send(b"add")
-            res = name + "|" + author + "|" + str(date) + "|" + publis_house
+            res = name + "|" + author + "|" + str(date) + "|" + publis_house#"|" -нумеровка сообщений для отправки на сервер
             time.sleep(2)
             sock.send(bytearray(res, "utf-8"))#Послать сообщение на сервер
             time.sleep(2)
@@ -207,8 +206,8 @@ def Sender():
             print("Нет такой команды. повотрите заново.")
             print(stringMenu)
 
-t1 = threading.Thread(target=Reciver)
-t2 = threading.Thread(target=Sender)
+t1 = threading.Thread(target=Reciver)#начинаем поток, который будет получать сообщения от сервера
+t2 = threading.Thread(target=Sender)# /// отправлять
 
-t1.start()
+t1.start()#запуск потока
 t2.start()

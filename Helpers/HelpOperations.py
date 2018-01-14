@@ -65,15 +65,15 @@ def find(listOfbooks, params):
         return "no such element"
 
 def findComplex(listOfbooks, params):
-    params = params.split('|')
+    params = params.split('|')#функция split разбивает строчку на составные части
     #Ожидается, что получили 3 параметра
     # 1 параметр - название книги
     # 2 параметр - автор книги
-    # 4 параметр - год издания книги
+    # 3 параметр - год издания книги
     print('Параметры сложного поиска: ', params)
     res = ''
-    cnt = 0
-    if len(params) != 3:
+    cnt = 0#счётчик
+    if len(params) != 3:#!=  - не равно
         return 'BadParams'
     for ld in listOfbooks:
         if ld["name"] == str(params[0]) and ld["author"] == str(params[1]) and str(ld["year"]) == str(params[2]):
@@ -150,7 +150,6 @@ def printAll(listOfbooks):
     return res
 def update(listOfbooks, params):
     params = params.split("|")
-    #Здесь нужно закончить обновление книги. Нужно найти нужную книгу в цикле и обновить у нее поле.
     # Имя поля хранится во втором параметре
     print('Параметры в самом обновлении: ', params)
     for l in listOfbooks: #l это очередная книга
@@ -166,5 +165,5 @@ def saveBooks(listOfbooks):
     print("Список книг теперь такой:\n", listOfbooks)
     data = {}
     data['books'] = listOfbooks
-    with open('/Users/fomichevalexey/PycharmProjects/LibaryPython/SolutionFromNet/books.json', 'w') as outfile:
-        json.dump(data, outfile)
+    with open('C:\\Users\\Nic\\Desktop\\DDZ\\ProjRelease2\\LibaryPython\\SolutionFromNet\\books.json', 'w') as outfile:
+        json.dump(data, outfile)#сохраняем файл

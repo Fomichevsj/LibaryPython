@@ -9,15 +9,14 @@ import select
 from appJson import run
 
 sock = socket.socket()
-#sock.bind(('', 1080))
 try:
-    sock.bind(('', 1080))
+    sock.bind(('', 1080))#Подключаемся к сокету, привязываем сокет к этому адресу
 except OSError:
     print("Нельзя делать более одного подключения сервера")
     exit(1)
 sock.listen(20)
-conn = []
-data = ''
+conn = []#переменная, которая будет в себе хранить все соединения
+data = ''#сообщение приходящее от клиента
 listOfbooks = []
 boolWasAddCommand = False
 boolWasDeleteCommand = False
@@ -39,14 +38,14 @@ def SenderAndRecier():
         for i in range(len(conn)):
             print('слушаем клиента ', i)
             try:
-                ready = select.select(list(conn), [], [], 4)
+                ready = select.select(list(conn), [], [], 4)#функция, которая просматривает поочерёдно всех клиентов
+                # и тот клиент, который прислал сообщение записывается в функцию ready
                 print('Попытаемся получить сообщение.')
-                print(ready[0])
-                #print(conn[i])
+                print(ready[0])#тот клиент, который прислал сообщение
                 if ready[0]:
-                    data = ready[0][0].recv(1024)
-                    print('Количество подключений: ', len(conn))
-                    print('Клиент', i,  'активен. Получили сообщение. -> ', data.decode('utf-8'))
+                    data = ready[0][0].recv(1024)#клиент с которым взаимодействует сервер
+                    print('Количество подключений: ', len(conn))#берём количество клиентов, которые подключены
+                    print('Клиент', i,  'активен. Получили сообщение. -> ', data.decode('utf-8'))# decode - перевод строки байтов в обычную строчку tf8-кодировка
                 if data:
 
                     if boolWasAddCommand:
@@ -99,12 +98,11 @@ def SenderAndRecier():
                         msg = run(str(data.decode("utf-8")), listOfbooks, "")
                         ready[0][0].send(str(msg).encode())#Возращает число
                     if data == "exit".encode() or data == "5":
-                        ready[0][0].send('okGoodbye'.encode())
-                        #ready[0][0].close()
+                        ready[0][0].send('ok Goodbye'.encode())#активный клиент с которым мы работаем
                         for j in range(len(conn)):
                             print('Сравниваем коннекшин ', j)
                             if conn[j] == ready[0][0]:
-                                conn.pop(j)
+                                conn.pop(j)#если клиент завершил свою работу, то убираем из списка соединённых клиентов
                                 print('Клиент ', j, ' Разорвал соединение')
                                 print('Теперь количество клиентов: ', len(conn))
                                 break
@@ -114,23 +112,20 @@ def SenderAndRecier():
                         ready[0][0].send(str(msg).encode())
                     print('Пришло сообщение!')
                     print(data.decode())
-                    #print('Отправляю клиенту: ', i)
-                    #ans = "Ответ от сервака: ".encode() + data + "\n".encode()
-                    #ready[0][0].send(ans)
-                    data = 0
+                    data = 0#обнуляем переменную, которая хранила сообщение от клиента
                 ready = None
-            except socket.error as e:
-                if e.errno == 10053:
-                    conn.pop(i)
+            except socket.error as e:#обработка исключенй
+                if e.errno == 10053:#номер исключения
+                    conn.pop(i)#убираем клиента из списка подключённых клиентов
                     print("Подключено пользователй:", len(conn))
                 else:
-                    raise
+                    raise# возбуждает указанное исключение
 
 def Accepter():
     while 1:
         time.sleep(2)
         print('in accepter')
-        global conn
+        global conn#глобальная переменная используется во всём файле и содержит список всех подключённых клиентов
         conn.append(sock.accept()[0])
         print("Подключено пользователй:", len(conn))
 
