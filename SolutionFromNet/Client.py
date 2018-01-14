@@ -10,7 +10,7 @@ from pip._vendor.appdirs import unicode
 stringMenu = """В данной программе доступны следующие функции:
         1. print all - Вывести на экран все киниг
         2. add - Добавить книгу
-        3. delete - Удалить книгу по ее названию
+        3. delete - Удалить книгу
         4. find - Найти книгу по ее названию
         5. exit - Выход из программы
         6. help - просмотр меню
@@ -61,10 +61,23 @@ def Sender():
                 print('Вы не ввели название киниги. Попробуйте заново.')
                 print(stringMenu)
                 continue
-            sock.send(b'find')  # используем команду find тк она по сути выполняет теже функции
+            bookAuthorForUpdate = input('Автор: ')
+            if bookAuthorForUpdate == '':
+                print('Вы не ввели автора книги. Попробуйте выполнить команду снова.')
+                continue
+            bookYearForUpdate = input('Год: ')
+            if bookYearForUpdate == '':
+                print('Вы не ввели год издания. Попробуйте выполнить команду снова.')
+                continue
+            bookHomeForUpdate = input('Издательский дом: ')
+            if bookHomeForUpdate == '':
+                print('Вы не ввели издательский дом. Попробуйте выполнить команду снова.')
+                continue
+            srvMsg = bookToUpdate + "|" + bookAuthorForUpdate + "|" + bookYearForUpdate + "|" + bookHomeForUpdate
+            sock.send(b'hardfind')  # используем команду find тк она по сути выполняет теже функции
             time.sleep(2)
-            sock.send(bytearray(bookToUpdate, "utf-8"))
-            time.sleep(3)
+            sock.send(bytearray(srvMsg, "utf-8"))
+            time.sleep(2)
             if boolNoSuchElement == True:# Не смогли найти книгу. Значит и поле вводить не нужно
                 print('Книга не найдена. Попробуйте уточнить поиск.')
                 print(stringMenu)
@@ -92,7 +105,7 @@ def Sender():
             newValue = input()
             sock.send(b'update')
             time.sleep(2)
-            sock.send(bytearray(bookToUpdate + "|" + fieldToUpdate + "|"+ newValue, "utf-8"))
+            sock.send(bytearray(srvMsg + "|" + fieldToUpdate + "|"+ newValue, "utf-8"))
             time.sleep(2)
             continue
         if cmd == "add" or cmd == "2":
@@ -122,11 +135,27 @@ def Sender():
             sock.send(bytearray(res, "utf-8"))#Послать сообщение на сервер
             time.sleep(2)
         elif cmd == "delete" or cmd == "3":
-            print("Введите имя киниги для удаления")
-            bookName = input()
+            bookName = input("Введите название киниги для удаления: ")
+            if bookName == '':
+                print('Вы не ввели название книги. Попробуйте выполнить команду снова.')
+                continue
+            bookAuthorForDelete = input('Введите автора: ')
+            if bookAuthorForDelete == '':
+                print('Вы не ввели автора книги. Попробуйте повторить команду снова.')
+                continue
+            bookYearForDelete = input('Введите год издания книги: ')
+            if bookYearForDelete == '':
+                print('Вы не ввели год издания книги. Попробуйте снова повторить команду.')
+                continue
+            bookHomeForDelete = input('Введите издательский дом: ')
+            if bookHomeForDelete == '':
+                print('Вы не ввели издательский дом. Попробуйте повпторить команду позже.')
+                continue
+            servMsg = bookName + "|" + bookAuthorForDelete + "|" + bookYearForDelete + "|" + bookHomeForDelete
             sock.send(b"delete")
             time.sleep(2)
-            sock.send(bytearray(bookName, "utf-8"))
+            sock.send(bytearray(servMsg, "utf-8"))
+            time.sleep(2)
         elif cmd == "find" or cmd == "4":
             print("Введите имя киниги для поиска")
             bookName = input()
@@ -156,9 +185,18 @@ def Sender():
             if bookToFind == "":
                 print('Вы не ввели имя книгию. Попробуйте снова.')
                 continue
+            bookAuthorToPrint = input('Введите автора книги: ')
+            if bookAuthorToPrint == '':
+                print('Вы не ввели автора книги. Попробуйте выполнить команду снова.')
+                continue
+            bookYearForPrint = input('Введите год издания книги: ')
+            if bookYearForPrint == '':
+                print('Вы не ввели год издания книги. Попробуйте выполнить команду снова.')
+                continue
+            srvMsg = bookToFind + "|" + bookAuthorToPrint + "|" + bookYearForPrint
             sock.send(b'find')#используем команду find тк она по сути выполняет теже функции
             time.sleep(2)
-            sock.send(bytearray(bookToFind, "utf-8"))
+            sock.send(bytearray(srvMsg, "utf-8"))
             time.sleep(2)
         elif cmd == "count" or cmd == "7":
             sock.send(bytearray(cmd, "utf-8"))

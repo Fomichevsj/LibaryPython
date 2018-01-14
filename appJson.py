@@ -1,5 +1,5 @@
 import json
-from Helpers.HelpOperations import delete, add, printAll, saveBooks, find, count, update, findComplex
+from Helpers.HelpOperations import delete, add, printAll, saveBooks, find, count, update, findComplex, hardfind
 
 
 def run(command, listOfbooks, params):
@@ -33,6 +33,10 @@ def run(command, listOfbooks, params):
             print("appJson: Завершаю программу")
             saveBooks(listOfbooks)
             return listOfbooks
+        elif command == "hardfind":
+            print("appJson: Строгий поиск")
+            msg = hardfind(listOfbooks, params)
+            return msg
         elif command == "update":
             msg = update(listOfbooks, params)
             return msg

@@ -23,6 +23,7 @@ boolWasAddCommand = False
 boolWasDeleteCommand = False
 bollWasFindCommand = False
 boolWasUpdateCommand = False
+boolWasHardFind = False
 def SenderAndRecier():
     global data
     global conn
@@ -30,6 +31,7 @@ def SenderAndRecier():
     global boolWasDeleteCommand
     global bollWasFindCommand
     global boolWasUpdateCommand
+    global boolWasHardFind
 
     while 1:
         print('in reciever')
@@ -68,6 +70,11 @@ def SenderAndRecier():
                         msg = run("find", listOfbooks, data.decode("utf-8"))
                         ready[0][0].send(msg.encode())
                         bollWasFindCommand = False
+                    if boolWasHardFind:
+                        print('Прошлая команда была жесткий поиск')
+                        msg = run("hardfind", listOfbooks, data.decode("utf-8"))
+                        ready[0][0].send(msg.encode())
+                        boolWasHardFind = False
                     if data == "add".encode() or data == "2".encode():
                         print('Мы должны добавить книгу в библиоткеу!')
                         boolWasAddCommand = True
@@ -80,6 +87,9 @@ def SenderAndRecier():
                     if data == "find".encode() or data == "4".encode():
                         print('Нужно найти книгу')
                         bollWasFindCommand = True
+                    if data == "hardfind".encode():
+                        print("Нужен жесткий поиск")
+                        boolWasHardFind = True
                     if data == "print all".encode() or data == "1".encode():
                         print('Должны напечатать все книги')
                         msg = run(str(data.decode("utf-8")), listOfbooks, "")

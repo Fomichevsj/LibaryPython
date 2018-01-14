@@ -5,10 +5,19 @@ import time
 
 def delete(listOfbooks, params):
     i = 0
+    params = params.split("|")
+    #Ожидается 4 параметра.
+    #1 параметр - название книги
+    #2 параметр - автор книги
+    #3 параметр - год издания
+    #4 параметр - издательский дом
+    if len(params) != 4:
+        return "BadParams"
     found = False
     for ld in listOfbooks:
         print("шаг поиска ", i)
-        if ld["name"] == params:
+        if ld["name"] == str(params[0]) and ld["author"] == str(params[1]) and str(ld["year"]) == str(params[2]) \
+                and ld["publish home"] == params[3]:
             print("Нашли нужную кнгиу")
             print(ld["author"], ld["year"])
             print(ld)
@@ -22,10 +31,10 @@ def delete(listOfbooks, params):
         print(listOfbooks.pop(i))
         print("Кинга удалена")
         saveBooks(listOfbooks)
-        return "success delete"
+        return "SUCCESS.\nУдалена книга с параметрами:\nНазвание: " + params[0] + "\nАвтор: " + params[1] + "\nГод: " + params[2] + "\nИздание: " + params[3]
     else:
         print("Такой эелемент не найден. Попробуйте еще раз")
-        return "no such element"
+        return "Такая книга не найдена. Попробуйте снова."
 
 #Подсчет числа элементов книг в библиотеке
 def count(listOfbooks):
@@ -76,6 +85,31 @@ def findComplex(listOfbooks, params):
         return 'Нет результатов поиска. Попробуйте уточнить поиск.'
     else:
         return 'По вашему запросу найдено ' + str(cnt) + ' книг:\n' + res
+def hardfind(listOfbooks, params):
+    params = params.split('|')
+    #Ожидается, что получили 3 параметра
+    # 1 параметр - название книги
+    # 2 параметр - автор книги
+    # 3 параметр - год издания книги
+    # 4 параметр - издательский дом книги
+    print('Параметры сложного поиска: ', params)
+    res = ''
+    cnt = 0
+    if len(params) != 4:
+        return 'BadParams in hardFind'
+    for ld in listOfbooks:
+        print('В hardFind цикл')
+        if ld["name"] == str(params[0]) and ld["author"] == str(params[1]) and str(ld["year"]) == str(params[2]) and str(ld["publish home"]) == str(params[3]):
+            res = res + "Название: " + ld["name"] + "\nАвтор: " + ld["author"] \
+              + "\nГод издания: " + str(ld["year"]) + "\nИздательский дом: " + ld["publish home"] + "\n" \
+              + "Количество экземпляров: " + str(ld["count"]) + "\n\n"
+            cnt = cnt + 1#количество книг по запросу больше увеличиваем на одну
+            print('нашли книгу')
+    if cnt == 0:
+        print('не нашли нужную книгу')
+        return 'no such element'
+    else:
+        return 'По вашему запросу найдено ' + str(cnt) + ' книг:\n' + res
 
 
 def add(listOfbooks, params):
@@ -116,11 +150,14 @@ def printAll(listOfbooks):
     return res
 def update(listOfbooks, params):
     params = params.split("|")
-    #Здесь нужно закончить обновление книги. Нужно найти нужную книгу в цикле и обновить у нее поле. Имя поля хранится во втором параметре
+    #Здесь нужно закончить обновление книги. Нужно найти нужную книгу в цикле и обновить у нее поле.
+    # Имя поля хранится во втором параметре
+    print('Параметры в самом обновлении: ', params)
     for l in listOfbooks: #l это очередная книга
-        if l["name"] == params[0]:
+        if l["name"] == params[0] and l["author"] == params[1] and str(l["year"]) == str(params[2])\
+                and l["publish home"] == params[3]:
             print('Нашли нужную книгу. Обновим ее поле.')
-            l[params[1]] = params[2]# Поставить новое значение
+            l[params[4]] = params[5]# Поставить новое значение
             saveBooks(listOfbooks)
             return 'update completed'
     print('')
